@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evan Platel — CV</title>
+  <style>
+    :root {
+      --accent-1: #add9ff;
+      --accent-2: #efb5ff;
+      --accent-3: #c9fdc7;
+      --muted: #586069;
+      --shadow: 0 6px 20px rgba(20,30,50,0.08);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+      color: #0f1724;
+      transition: background 0.5s ease;
+    }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    header {display: flex; gap: 18px; align-items: center;}
+    .avatar {
+      width: 90px; height: 90px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 28px; color: var(--muted);
+    }
+    .hero {flex: 1;}
+    h1 {margin: 0; font-size: 24px;}
+    .lead {color: var(--muted);}
+    .controls {display: flex; gap: 10px; align-items: center;}
+    .btn {
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.1);
+      cursor: pointer;
+      font-weight: 600;
+      background: white;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover {transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+    .btn.primary {
+      background: linear-gradient(90deg, #fff, #f4f4f4);
+    }
+    .flag svg {
+      width: 20px;
+      height: 14px;
+      border-radius: 2px;
+      box-shadow: 0 0 2px rgba(0,0,0,0.2);
+      transition: transform .5s ease, opacity .4s ease;
+    }
+    .flag {
+      transition: transform .5s ease, opacity .4s ease;
+      visibility: visible;
+      opacity: 1;
+    }
+    .flag.fade {
+      transform: rotateY(180deg);
+      opacity: 0;
+      visibility: hidden;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: rgba(255,255,255,0.9);
+      padding: 16px;
+      margin-bottom: 10px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card.pop {
+      animation: popCard 0.4s ease;
+    }
+    @keyframes popCard {
+      0% {transform: scale(1);}
+      50% {transform: scale(1.05);}
+      100% {transform: scale(1);}
+    }
+    .card:hover {transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.06);}
+    .bar {height: 10px; background: #ddd; border-radius: 999px; overflow: hidden; margin-top: 8px;}
+    .bar i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      width: 0;
+      transition: width .8s;
+    }
+    .project {
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.05);
+      background: rgba(255,255,255,0.9);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .projectDetail {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s ease, transform .4s ease;
+    padding: 10px 0;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: linear-gradient(90deg,var(--accent-3),var(--accent-1));
+    }
+    #projectDetail {
+      margin-top: 10px;
+      color: var(--muted);
+      font-style: italic;
+    }
+    @media print {.controls {display: none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="avatar">EP</div>
+      <div class="hero">
+        <h1 id="name">Evan Platel</h1>
+        <p class="lead" data-en="Student · Mathematics & Physics Bachelor — University of Western Brittany">
+          Étudiant · Licence de Mathématiques et Physique — Université de Bretagne Occidentale
+        </p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="themeToggle" aria-label="Changer le thème">🎨 <span>Thème</span></button>
+        <button class="btn" id="langToggle" aria-label="Changer de langue">
+          <span id="flagFR" class="flag hidden">
+            <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg">
+              <rect width="1" height="2" x="0" fill="#0055A4"/>
+              <rect width="1" height="2" x="1" fill="#FFFFFF"/>
+              <rect width="1" height="2" x="2" fill="#EF4135"/>
+            </svg>
+          </span>
+          <span id="flagEN" class="flag">
+            <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+              <rect width="60" height="30" fill="#012169"/>
+              <path d="M0 0L60 30M60 0L0 30" stroke="#fff" stroke-width="6"/>
+              <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" stroke-width="4"/>
+              <path d="M30 0V30M0 15H60" stroke="#fff" stroke-width="10"/>
+              <path d="M30 0V30M0 15H60" stroke="#C8102E" stroke-width="6"/>
+            </svg>
+          </span>
+          <span id="langLabel">EN</span>
+        </button>
+        <button class="btn primary" id="downloadBtn">Télécharger (PDF)</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div>
+        <section class="card" id="about">
+          <h3 data-en="About">À propos</h3>
+          <p data-en="A motivated student with a passion for astrophysics, I demonstrate rigor and strong organizational skills. Accustomed to teamwork, I integrate easily into collaborative environments and contribute in a structured and effective manner to collective projects. Curious, autonomous, and committed, I invest myself fully in the tasks entrusted to me.">
+            Étudiant motivé et passionné par l’astrophysique, je fais preuve d’une rigueur et d’un sens de l’organisation. Habitué au travail en équipe, je m’intègre aisément dans des environnements collaboratifs et contribue de manière structurée et efficace aux projets collectifs. Curieux, autonome et impliqué, je m’investis pleinement dans les missions qui me sont confiées.
+          </p>
+        </section>
+
+        <section class="card" id="education">
+          <h3 data-en="Education">Éducation</h3>
+          <p><strong>2025 — Présent</strong><br><span data-en="Bachelor of Mathematics and Physics — University">Licence de Mathématiques et Physique — Université</span></p>
+          <p><strong>2021 — 2025</strong><br><span data-en="High School Diploma — Honors">Baccalauréat — Mention Bien</span></p>
+          <p><strong>2017 — 2021</strong><br><span data-en="Middle School Certificate — Distinctions">Dimplôme National du Brevet — Mention Très Bien</span></p>
+        </section>
+
+        <section class="card" id="skills">
+          <h3 data-en="Skills">Compétences</h3>
+          <div class="skill" data-level="90"><div data-en="Computer skills">Compétences informatiques</div><div class="bar"><i></i></div></div>
+          <div class="skill" data-level="80"><div data-en="Autonomy in completing tasks">Autonomie dans le travail</div><div class="bar"><i></i></div></div>
+          <div class="skill" data-level="85"><div data-en="French language and writing skills">Langue française et capacités récactionnelles</div><div class="bar"><i></i></div></div>
+          <div class="skill" data-level="75"><div data-en="Ability to understand and use scientific notions">Capacité à comprendre et appliquer des notions scientifiques</div><div class="bar"><i></i></div></div>
+        </section>
+
+        <section class="card" id="projects">
+        <h3 data-en="Professional Experiences">Expériences professionnelles</h3>
+          <div class="project" data-en="Summer 2025: I worked as a receptionist at the Occupational Medicine department in Iroise.">
+            Été 2025 : j'ai travaillé en tant que secrétaire standardiste à la Médecine du Travail en Iroise
+          </div>
+          <div class="projectDetail" data-en="This job allowed me to develop my communication skills with colleagues, patients, and various professional contacts.">
+            Ce travail m’a permis de développer mes compétences en communication avec les collègues et les patients.
+          </div>
+          <div class="project" data-en="Year 2021: Observation internship at Thales">
+            Année 2021 : Stage d'observation à Thales
+          </div>
+          <div class="projectDetail" data-en="This internship allowed me to discover how research and development operate within the military industry.">
+          Ce stage m’a permis de découvrir le fonctionnement de la recherche et du développement dans l’industrie militaire.
+          </div>
+        </section>
+      </div>
+      <aside>
+        <div class="card">
+          <h4 data-en="Contact">Contact</h4>
+          <p><strong>Email :</strong> <span>evan.platel@etudiant.univ-brest.fr/evanpla43@gmail.com</span></p>
+          <p><strong data-en="Phone">Téléphone</strong> : +33 7 80 40 66 93</p>
+          <p><strong data-en="Location">Localisation</strong> : Brest, France</p>
+        </div>
+
+        <div class="card">
+          <h4 data-en="Languages">Langues</h4>
+          <span class="badge" data-en="French — Native">Français — Natif</span>
+          <span class="badge" data-en="English — B2">Anglais — B2</span>
+          <span class="badge" data-en="Spanish — A2">Espagnol — A2</span>
+        </div>
+
+        <div class="card">
+          <h4 data-en="Interests">Centres d’intérêt</h4>
+          <ul>
+            <li data-en="Music, playing piano since 2015">Musique, je joue du piano depuis 2015</li>
+            <li data-en="Astrophysics">Astrophysique</li>
+            <li data-en="Visual arts, I love museums">Arts visuels, j'aime visiter les musées</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+/* ---------- Variables globales ---------- */
+const langToggle = document.getElementById('langToggle');
+const flagFR = document.getElementById('flagFR');
+const flagEN = document.getElementById('flagEN');
+const langLabel = document.getElementById('langLabel');
+const themeToggle = document.getElementById('themeToggle');
+const downloadBtn = document.getElementById('downloadBtn');
+const projectCard = document.getElementById('projects');
+
+let isEN = true; // état de la langue (true = anglais)
+
+/* ---------- Bouton langue / switchLanguage ---------- */
+function switchLanguage() {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const fr = el.getAttribute('data-fr') || el.textContent;
+    const en = el.getAttribute('data-en');
+    if (!el.hasAttribute('data-fr')) el.setAttribute('data-fr', fr);
+    el.textContent = isEN ? en : fr;
+  });
+
+  const currentFlag = isEN ? flagFR : flagEN;
+  if (currentFlag) currentFlag.classList.add("fade");
+  setTimeout(() => {
+    if (flagEN) flagEN.classList.toggle('hidden', !isEN);
+    if (flagFR) flagFR.classList.toggle('hidden', isEN);
+    if (currentFlag) currentFlag.classList.remove("fade");
+  }, 250);
+
+  if (langLabel) langLabel.textContent = isEN ? 'EN' : 'FR';
+  if (downloadBtn) downloadBtn.textContent = isEN ? 'Download (PDF)' : 'Télécharger (PDF)';
+  if (themeToggle) {
+    const span = themeToggle.querySelector('span');
+    if (span) span.textContent = isEN ? 'Theme' : 'Thème';
+  }
+  document.documentElement.lang = isEN ? 'en' : 'fr';
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('pop');
+    void card.offsetWidth;
+    card.classList.add('pop');
+  });
+
+  // fermer tous les détails quand on change de langue
+  document.querySelectorAll('.projectDetail').forEach(d => {
+    d.style.opacity = '0';
+    d.style.transform = 'translateY(10px)';
+    d.style.display = 'none';
+  });
+}
+
+langToggle && langToggle.addEventListener('click', () => {
+  isEN = !isEN;
+  switchLanguage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+switchLanguage(); // initial language render
+
+/* ---------- Animation barres de compétences (sécurisé) ---------- */
+document.querySelectorAll('.skill').forEach(s => {
+  const i = s.querySelector('i');
+  const lvl = s.dataset.level || '0';
+  if (!i) return; // safeguard pour éviter les erreurs si structure inattendue
+  i.style.width = '0';
+  setTimeout(() => { i.style.width = (parseInt(lvl,10) || 0) + '%'; }, 600);
+});
+
+/* ---------- Thème ---------- */
+let alt = false;
+themeToggle && themeToggle.addEventListener('click', () => {
+  alt = !alt;
+  document.body.style.background = alt
+    ? "linear-gradient(135deg,#f3f7ff,#e9f7f1,#fff0f5)"
+    : "linear-gradient(135deg,#add9ff,#efb5ff,#c9fdc7)";
+});
+
+downloadBtn.addEventListener('click', () => {
+  const pdf = isEN ? "CV_Evan_Platel_English_ver.pdf" : "CV_Evan_Platel_French_ver.pdf";
+  window.open(pdf, "_blank");
+});
+
+/* ---------- Projects : plusieurs projectDetail avec animation ---------- */
+const projects = document.querySelectorAll('.project');
+const details = document.querySelectorAll('.projectDetail');
+
+function hideDetail(detail) {
+  if (!detail) return;
+  detail.style.opacity = "0";
+  detail.style.transform = "translateY(10px)";
+  setTimeout(() => detail.style.display = "none", 300);
+}
+
+function showDetail(detail) {
+  if (!detail) return;
+  detail.style.display = "block";
+  detail.style.opacity = "0";
+  detail.style.transform = "translateY(10px)";
+  void detail.offsetHeight; // force reflow
+  detail.style.opacity = "1";
+  detail.style.transform = "translateY(0)";
+}
+
+projects.forEach((project, index) => {
+  project.addEventListener('click', () => {
+    // fermer les autres
+    details.forEach((d, i) => { if (i !== index) hideDetail(d); });
+
+    const detail = details[index];
+    if (!detail) return;
+
+    // mettre à jour le texte selon la langue (sécurisé)
+    if (isEN) {
+      const en = detail.getAttribute("data-en");
+      if (en !== null) detail.textContent = en;
+    } else {
+      const fr = detail.getAttribute("data-fr");
+      if (fr !== null) detail.textContent = fr;
+    }
+
+    // toggle
+    if (detail.style.display === "block") {
+      hideDetail(detail);
+    } else {
+      showDetail(detail);
+      // faire défiler doucement jusqu'au détail si besoin
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+});
+</script>
+</body>
+</html>
